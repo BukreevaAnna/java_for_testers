@@ -9,8 +9,9 @@ public class Triangle {
 
     }
 
-    private static double TriangleArea(double a, double b, double c) {
-        return (a+b+c)/2;
+    public static double TriangleArea(double a, double b, double c) {
+        double p = (a+b+c)/2;
+        return Math.sqrt(p*(p-a)*(p-b)*(p-c));
     }
 
 
@@ -19,7 +20,7 @@ public class Triangle {
         System.out.println(text);
     }
 
-    private static double TrianglePerimeter(double a, double b, double c) {
+    public static double TrianglePerimeter(double a, double b, double c) {
         return a + b + c;
     }
 }
