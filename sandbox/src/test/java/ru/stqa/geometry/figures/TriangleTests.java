@@ -8,7 +8,7 @@ public class TriangleTests {
     @Test
 
     void TrianglePerimeter(){
-        Assertions.assertEquals(24, Triangle.TrianglePerimeter(6, 8, 10));
+        Assertions.assertEquals(12, Triangle.TrianglePerimeter(4,4,4));
     }
 
     @Test

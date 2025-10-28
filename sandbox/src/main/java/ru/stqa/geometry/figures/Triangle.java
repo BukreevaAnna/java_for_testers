@@ -1,8 +1,11 @@
 package ru.stqa.geometry.figures;
 
 public class Triangle {
+    static double a = 4;
+    static double b = 4;
+    static double c = 4;
 
-    public static void printTriangleArea(double a, double b, double c) {
+    public static void printTriangleArea() {
         String text = String.format("Площадь труегольника со сторонами %f, %f и %f = %f", a, b,c, TriangleArea(a, b, c));
         System.out.println(text);
 
@@ -15,7 +18,7 @@ public class Triangle {
     }
 
 
-    public static void printTranglePerimeter(double a, double b, double c) {
+    public static void printTranglePerimeter() {
         String text = String.format("Периметр треугольника со сторонами %f, %f и %f = %f", a, b,c, TrianglePerimeter(a, b, c));
         System.out.println(text);
     }
