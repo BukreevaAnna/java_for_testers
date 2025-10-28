@@ -8,12 +8,14 @@ public class TriangleTests {
     @Test
 
     void TrianglePerimeter(){
-        Assertions.assertEquals(12, Triangle.TrianglePerimeter(4,4,4));
+        var s = new Triangle(7,7,7);
+        double result = s.perimeter();
+        Assertions.assertEquals(21, result);
     }
 
     @Test
 
     void TriangleArea(){
-        Assertions.assertEquals(6.928203230275509, Triangle.TriangleArea(4,4,4));
+        Assertions.assertEquals(6.928203230275509, new Triangle(4,4,4).area());
     }
 }
