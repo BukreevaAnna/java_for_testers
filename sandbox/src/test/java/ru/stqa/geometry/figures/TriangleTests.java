@@ -7,6 +7,28 @@ public class TriangleTests {
 
     @Test
 
+    void cannotCreateTriangleWithNegativeSide(){
+        try {
+            new Triangle(5.0, 3.0, -6.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            // OK
+        }
+    }
+
+    @Test
+
+    void checkungTheTriangleInequality(){
+        try {
+            new Triangle(5.0, 3.0, 6.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            // OK
+        }
+    }
+
+    @Test
+
     void TrianglePerimeter(){
         var s = new Triangle(7,7,7);
         double result = s.perimeter();

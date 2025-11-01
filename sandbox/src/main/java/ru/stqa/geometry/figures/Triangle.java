@@ -1,6 +1,16 @@
 package ru.stqa.geometry.figures;
 
 public record Triangle(double side_one, double side_two, double side_three) {
+    public Triangle {
+        if(side_one < 0 || side_two < 0 || side_three < 0){
+            throw new IllegalArgumentException("Triangle side should be non-negative");
+        }else {
+            if(side_one + side_two < side_three || side_one + side_three < side_two || side_two + side_three < side_one){
+                throw new IllegalArgumentException("The sum of two sides of a triangle must be less than the third side");
+            }
+
+        }
+    }
 
 
     public static void printTranglePerimeter(Triangle s) {
