@@ -33,4 +33,24 @@ public record Triangle(double side_one, double side_two, double side_three) {
         double p = (this.side_one+this.side_two+this.side_three)/2;
         return Math.sqrt(p*(p-this.side_one)*(p-this.side_two)*(p-this.side_three));
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Triangle triangle = (Triangle) o;
+        return (Double.compare(this.side_one, triangle.side_one) == 0 && Double.compare(this.side_two, triangle.side_two) == 0 && Double.compare(this.side_three, triangle.side_three) == 0)
+                || (Double.compare(this.side_two, triangle.side_one) == 0 && Double.compare(this.side_three, triangle.side_two) == 0 && Double.compare(this.side_one, triangle.side_three) == 0)
+                || (Double.compare(this.side_three, triangle.side_one) == 0 && Double.compare(this.side_one, triangle.side_two) == 0 && Double.compare(this.side_two, triangle.side_three) == 0);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Double.hashCode(side_one);
+        result = 31 * result + Double.hashCode(side_two);
+        result = 31 * result + Double.hashCode(side_three);
+        return result;
+    }
 }

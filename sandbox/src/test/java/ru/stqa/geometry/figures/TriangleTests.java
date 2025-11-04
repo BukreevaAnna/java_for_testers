@@ -40,4 +40,11 @@ public class TriangleTests {
     void TriangleArea(){
         Assertions.assertEquals(6.928203230275509, new Triangle(4,4,4).area());
     }
+
+    @Test
+    void testEquality(){
+        var e1 = new Triangle(3, 4, 5);
+        var e2 = new Triangle(5, 3, 4);
+        Assertions.assertEquals(e1, e2);
+    }
 }
