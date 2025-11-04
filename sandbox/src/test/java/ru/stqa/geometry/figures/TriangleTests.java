@@ -43,7 +43,7 @@ public class TriangleTests {
 
     @Test
     void testEquality(){
-        var e1 = new Triangle(3, 4, 5);
+        var e1 = new Triangle(5, 4, 3);
         var e2 = new Triangle(5, 3, 4);
         Assertions.assertEquals(e1, e2);
     }

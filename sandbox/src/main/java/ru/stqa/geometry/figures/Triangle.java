@@ -43,7 +43,10 @@ public record Triangle(double side_one, double side_two, double side_three) {
         Triangle triangle = (Triangle) o;
         return (Double.compare(this.side_one, triangle.side_one) == 0 && Double.compare(this.side_two, triangle.side_two) == 0 && Double.compare(this.side_three, triangle.side_three) == 0)
                 || (Double.compare(this.side_two, triangle.side_one) == 0 && Double.compare(this.side_three, triangle.side_two) == 0 && Double.compare(this.side_one, triangle.side_three) == 0)
-                || (Double.compare(this.side_three, triangle.side_one) == 0 && Double.compare(this.side_one, triangle.side_two) == 0 && Double.compare(this.side_two, triangle.side_three) == 0);
+                || (Double.compare(this.side_three, triangle.side_one) == 0 && Double.compare(this.side_one, triangle.side_two) == 0 && Double.compare(this.side_two, triangle.side_three) == 0)
+                || (Double.compare(this.side_one, triangle.side_one) == 0 && Double.compare(this.side_three, triangle.side_two) == 0 && Double.compare(this.side_two, triangle.side_three) == 0)
+                || (Double.compare(this.side_three, triangle.side_one) == 0 && Double.compare(this.side_two, triangle.side_two) == 0 && Double.compare(this.side_one, triangle.side_three) == 0)
+                || (Double.compare(this.side_two, triangle.side_one) == 0 && Double.compare(this.side_one, triangle.side_two) == 0 && Double.compare(this.side_three, triangle.side_three) == 0);
     }
 
     @Override
