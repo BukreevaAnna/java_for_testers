@@ -21,6 +21,20 @@ public class GroupRemovalTests {
         driver.findElement(By.name("pass")).click();
         driver.findElement(By.name("pass")).sendKeys("secret");
         driver.findElement(By.xpath("//input[@value=\'Login\']")).click();
+        if (! isElementPresent(By.name("new"))) {
+            driver.findElement(By.linkText("groups")).click();
+        }
+        if (! isElementPresent(By.name("selected[]"))){
+            driver.findElement(By.name("new")).click();
+            driver.findElement(By.name("group_name")).click();
+            driver.findElement(By.name("group_name")).sendKeys("");
+            driver.findElement(By.name("group_header")).click();
+            driver.findElement(By.name("group_header")).sendKeys("");
+            driver.findElement(By.name("group_footer")).click();
+            driver.findElement(By.name("group_footer")).sendKeys("");
+            driver.findElement(By.name("submit")).click();
+            driver.findElement(By.linkText("group page")).click();
+        }
     }
 
     @AfterEach
@@ -31,10 +45,6 @@ public class GroupRemovalTests {
 
     @Test
     public void canRemoveGroup() {
-        if (! isElementPresent(By.name("new"))) {
-            driver.findElement(By.linkText("groups")).click();
-        }
-        driver.findElement(By.linkText("groups")).click();
         driver.findElement(By.name("selected[]")).click();
         driver.findElement(By.name("delete")).click();
         driver.findElement(By.linkText("group page")).click();
