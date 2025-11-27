@@ -10,7 +10,7 @@ public class LoginHelper {
         this.manager = manager;
     }
 
-    void login(String user, String password) {
+    public void login(String user, String password) {
         manager.driver.findElement(By.name("user")).click();
         manager.driver.findElement(By.name("user")).sendKeys(user);
         manager.driver.findElement(By.name("pass")).click();

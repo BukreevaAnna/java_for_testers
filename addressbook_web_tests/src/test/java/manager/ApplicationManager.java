@@ -18,11 +18,7 @@ public class ApplicationManager {
             Runtime.getRuntime().addShutdownHook(new Thread(driver::quit));
             driver.get("http://localhost/addressbook/");
             driver.manage().window().setSize(new Dimension(550, 692));
-            driver.findElement(By.name("user")).click();
-            driver.findElement(By.name("user")).sendKeys("admin");
-            driver.findElement(By.name("pass")).click();
-            driver.findElement(By.name("pass")).sendKeys("secret");
-            driver.findElement(By.xpath("//input[@value=\'Login\']")).click();
+            session().login("admin", "secret");
         }
     }
 
