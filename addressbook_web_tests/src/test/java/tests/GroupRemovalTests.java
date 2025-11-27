@@ -1,5 +1,6 @@
 package tests;
 
+import model.GroupData;
 import org.junit.jupiter.api.Test;
 
 public class GroupRemovalTests extends TestBase {
@@ -7,6 +8,9 @@ public class GroupRemovalTests extends TestBase {
 
     @Test
     public void canRemoveGroup() {
-        TestBase.app.removeGroup();
+        if (app.groups().isGroupPresent()){
+            app.groups().createGroup(new GroupData("group name", "header","group footer"));
+        }
+        TestBase.app.groups().removeGroup();
     }
 }

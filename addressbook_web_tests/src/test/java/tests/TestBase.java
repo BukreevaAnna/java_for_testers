@@ -1,9 +1,7 @@
 package tests;
 
 import manager.ApplicationManager;
-import model.GroupData;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.By;
 
 public class TestBase {
 
@@ -16,13 +14,6 @@ public class TestBase {
 
         }
         app.init();
-        if (app.isElementPresent(By.name("new"))) {
-            ApplicationManager.driver.findElement(By.linkText("groups")).click();
-        }
-        if (app.isElementPresent(By.name("selected[]"))){
-            app.createGroup(new GroupData("New Group", "Group header", "footer"));
-
-        }
     }
 
 }
