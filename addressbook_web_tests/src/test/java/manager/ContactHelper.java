@@ -27,6 +27,14 @@ public class ContactHelper extends HelperBase{
         removeSelectedContact();
         returnToHomePage();
     }
+
+    private void selectAllContacts() {
+        var checkboxes = manager.driver.findElements(By.name("selected[]"));
+        for (var checkbox : checkboxes){
+            checkbox.click();
+        }
+    }
+
     private void removeSelectedContact() {
         click(By.name("delete"));
     }
@@ -58,4 +66,15 @@ public class ContactHelper extends HelperBase{
     }
 
 
-}
+    public int getCount() {
+        return manager.driver.findElements(By.name("selected[]")).size();
+    }
+
+    public void removeAllContacts() {
+            selectAllContacts();
+            removeSelectedContact();
+            returnToHomePage();
+
+
+        }
+    }
