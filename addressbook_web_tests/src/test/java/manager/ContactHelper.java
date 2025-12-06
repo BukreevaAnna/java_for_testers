@@ -65,10 +65,10 @@ public class ContactHelper extends HelperBase{
         click(By.name("submit"));
     }
 
-
     public int getCount() {
         return manager.driver.findElements(By.name("selected[]")).size();
     }
+
 
     public void removeAllContacts() {
             selectAllContacts();
