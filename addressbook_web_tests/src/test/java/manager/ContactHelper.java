@@ -3,27 +3,32 @@ package manager;
 import model.ContactData;
 import org.openqa.selenium.By;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContactHelper extends HelperBase{
 
     public ContactHelper(ApplicationManager manager) {
         super(manager);
     }
 
-//    public void openContactsPage() {
-//        if (manager.isElementPresent(By.name("new"))) {
-//            click(By.linkText("add new"));
-//        }
-//    }
+    public void openContactsPage() {
+        if (!manager.isElementPresent(By.name("submit"))) {
+            click(By.linkText("add new"));
+        }
+    }
 
     public void createContact(ContactData contact) {
+        openContactsPage();
         initContactCreation();
         fillContactForm(contact);
         submitContactCreation();
         returnToHomePage();
     }
 
-    public void removeContact() {
-        selectContact();
+    public void removeContact(ContactData contact) {
+        openContactsPage();
+        selectContact(contact);
         removeSelectedContact();
         returnToHomePage();
     }
@@ -33,6 +38,23 @@ public class ContactHelper extends HelperBase{
         for (var checkbox : checkboxes){
             checkbox.click();
         }
+    }
+    public void removeAllContacts() {
+        openContactsPage();
+        selectAllContacts();
+        removeSelectedContact();
+        returnToHomePage();
+
+
+    }
+
+    public void modifyContact(ContactData contact, ContactData modifyContact) {
+        openContactsPage();
+        selectContact(contact);
+        initContactModification(contact);
+        fillContactForm(modifyContact);
+        submitContactModification();
+        returnToHomePage();
     }
 
     private void removeSelectedContact() {
@@ -57,8 +79,8 @@ public class ContactHelper extends HelperBase{
         type(By.name("email"), contact.email());
     }
 
-    private void selectContact() {
-        click(By.name("selected[]"));
+    private void selectContact(ContactData contact) {
+        click(By.cssSelector(String.format("input[value='%s']", contact.id())));
     }
 
     private void submitContactCreation() {
@@ -70,11 +92,23 @@ public class ContactHelper extends HelperBase{
     }
 
 
-    public void removeAllContacts() {
-            selectAllContacts();
-            removeSelectedContact();
-            returnToHomePage();
-
-
+    public List<ContactData> getList() {
+        var contacts = new ArrayList<ContactData>();
+        var tds = manager.driver.findElements(By.name("entry"));
+        for (var td : tds){
+            var name = td.getText();
+            var checkbox = td.findElement(By.name("selected[]"));
+            var id = checkbox.getAttribute("value");
+            contacts.add(new ContactData().withId(id).withFirstName(name));
         }
+        return contacts;
     }
+
+    private void submitContactModification() {
+        click(By.name("update"));
+    }
+
+    private void initContactModification(ContactData contact) {
+        click(By.xpath(String.format("//input[@value='%s']/ancestor::tr//img[@title='Edit']", contact.id())));
+    }
+}
