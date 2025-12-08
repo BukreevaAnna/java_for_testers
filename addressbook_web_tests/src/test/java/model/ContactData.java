@@ -22,4 +22,12 @@ public record ContactData(String id, String first_name, String last_name, String
     public ContactData withEmail(String email) {
         return new ContactData(this.id, this.first_name, this.last_name, email);
     }
+
+    public ContactData withAddress(String address) {
+        return null;
+    }
+
+    public ContactData withAllPhones(String phones) {
+        return null;
+    }
 }
