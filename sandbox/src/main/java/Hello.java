@@ -1,3 +1,5 @@
+import java.io.File;
+
 public class Hello {
     public static void main(String[] args) {
             var x = 1;
@@ -8,6 +10,13 @@ public class Hello {
                 var z = experement(x, y);
                 System.out.println("good job");
             }
+        System.out.println("Hello world!");
+
+        var configFile = new File("sandbox/build.gradle");
+        System.out.println(configFile.getAbsolutePath());
+        System.out.println(configFile.exists());
+
+        System.out.println(new File("").getAbsolutePath());
     }
 
     private static int experement(int x, int y) {
