@@ -10,6 +10,7 @@ import model.ContactData;
 import model.GroupData;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.function.Supplier;
@@ -49,7 +50,12 @@ public class Generator {
             ObjectMapper mapper = JsonMapper.builder()
                     .enable(SerializationFeature.INDENT_OUTPUT)
                     .build();
-            mapper.writeValue(new File(output), data);
+            var json = mapper.writeValueAsString(data);
+
+
+            try (var writer = new FileWriter(output)){
+                writer.write(json);
+            }
         } else {
             throw new IllegalArgumentException("Неизвестный формат данных " + format);
         }
