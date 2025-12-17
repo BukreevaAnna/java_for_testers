@@ -19,6 +19,8 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static tests.TestBase.randomFile;
+
 public class Generator {
 
     @Parameter(names={"--type", "-t"})
@@ -94,10 +96,17 @@ public class Generator {
     }
 
     private Object generateContacts() {
-        return generateData(() -> new ContactData()
-                .withFirstName(CommonFunctions.randomString(10))
-                .withLastName(CommonFunctions.randomString(10)));
+        var result = new ArrayList<ContactData>();
+        for (int i = 0; i < count; i++) {
+            result.add(new ContactData()
+                    .withFirstName(CommonFunctions.randomString(5))
+                    .withLastName(CommonFunctions.randomString(5))
+                    .withPhoto(randomFile("src/test/resources/images"))
+                    .withEmail(CommonFunctions.randomString(5)+"@gmail.com"));
+        }
+        return result;
     }
+
 
     private Object generateData(Supplier<Object> dataSupplier) {
         return Stream.generate(dataSupplier).limit(count).collect(Collectors.toList());
