@@ -35,4 +35,6 @@ public record ContactData(String id, String first_name, String last_name, String
     public ContactData withAllPhones(String phones) {
         return null;
     }
+
+
 }
