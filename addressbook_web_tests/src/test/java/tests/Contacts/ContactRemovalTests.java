@@ -1,5 +1,6 @@
 package tests.Contacts;
 import model.ContactData;
+import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
@@ -31,6 +32,28 @@ public class ContactRemovalTests extends TestBase{
         }
         app.contacts().removeAllContacts();
         Assertions.assertEquals(0, app.contacts().getCount());
+    }
+
+    @Test
+    void canRemoveContactFromGroup() {
+        var groups = app.hbm().getGroupList();
+        if (groups.isEmpty()) {
+            app.hbm().createGroup(new GroupData("", "Group", "Header", "Footer"));
+            groups = app.hbm().getGroupList();
+        }
+        var group = groups.get(0);
+        if (app.hbm().getContactsInGroup(group).isEmpty()) {
+            var contact = new ContactData()
+                    .withFirstName("Test")
+                    .withLastName("GroupRemove")
+                    .withPhoto(randomFile("src/test/resources/images"));
+            app.contacts().createContact(contact, group);
+        }
+        var oldContacts = app.hbm().getContactsInGroup(group);
+        var contactToRemove = oldContacts.get(0);
+        app.contacts().removeContactFromGroup(contactToRemove, group);
+        var newContacts = app.hbm().getContactsInGroup(group);
+        Assertions.assertEquals(oldContacts.size() - 1, newContacts.size());
     }
 
 }

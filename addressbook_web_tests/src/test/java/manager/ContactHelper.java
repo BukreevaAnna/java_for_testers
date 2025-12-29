@@ -5,6 +5,7 @@ import model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,5 +133,50 @@ public class ContactHelper extends HelperBase{
 
     private void initContactModification(ContactData contact) {
         click(By.xpath(String.format("//input[@value='%s']/ancestor::tr//img[@title='Edit']", contact.id())));
+    }
+
+    public void removeContactFromGroup(ContactData contact, GroupData group) {
+        openHomePage();
+        selectGroupWithContacts(group);
+        removeSelectedContactFromGroup(contact);
+        openHomePage();
+    }
+
+    private void openHomePage() {
+        if (!manager.isElementPresent((By.name("new")))) {
+            click(By.linkText("home"));
+        }
+    }
+
+
+    private void selectGroupWithContacts(GroupData group) {
+        new Select(manager.driver.findElement(By.name("group"))).selectByValue(group.id());
+    }
+
+    private void removeSelectedContactFromGroup(ContactData contact) {
+        click(By.cssSelector(String.format("input[value='%s']", contact.id())));
+        click(By.name("remove"));
+    }
+
+    public void addContactToGroup(ContactData contact, GroupData group) {
+        openHomePage();
+        selectContact(contact);
+        selectGroupForContact(group);
+        addToGroup();
+        returnToGeneralPage();
+    }
+
+    public void returnToGeneralPage() {
+        manager.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        click(By.cssSelector("#logo"));
+
+    }
+
+    private void addToGroup() {
+        click(By.name("add"));
+    }
+
+    private void selectGroupForContact(GroupData group) {
+        new Select(manager.driver.findElement(By.name("to_group"))).selectByValue(group.id());
     }
 }
